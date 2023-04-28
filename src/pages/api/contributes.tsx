@@ -21,8 +21,11 @@ export default async function og(req: NextRequest) {
   const { totalContributions, weeks } =
     contributes.data.user.contributionsCollection.contributionCalendar;
 
-  const width = weeks.length * 12;
-  const height = 7 * 12;
+  const size = 20;
+  const margin = 2;
+
+  const width = weeks.length * (size + margin * 2);
+  const height = 7 * (size + margin * 2);
 
   const weekItems = weeks.map((week) => {
     return week.contributionDays.map((day) => {
@@ -30,10 +33,10 @@ export default async function og(req: NextRequest) {
         <div
           key={day.date}
           style={{
-            width: "10px",
-            height: "10px",
+            width: `${size}px`,
+            height: `${size}px`,
             backgroundColor: day.color,
-            margin: "1px",
+            margin: `${margin}px`,
           }}
         ></div>
       );
