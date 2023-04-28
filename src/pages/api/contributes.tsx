@@ -21,7 +21,8 @@ export default async function og(req: NextRequest) {
   const { totalContributions, weeks } =
     contributes.data.user.contributionsCollection.contributionCalendar;
 
-  const width = weeks.length * 10;
+  const width = weeks.length * 12;
+  const height = 7 * 12;
 
   const weekItems = weeks.map((week) => {
     return week.contributionDays.map((day) => {
@@ -32,6 +33,7 @@ export default async function og(req: NextRequest) {
             width: "10px",
             height: "10px",
             backgroundColor: day.color,
+            margin: "1px",
           }}
         ></div>
       );
@@ -43,14 +45,11 @@ export default async function og(req: NextRequest) {
       <div
         style={{
           background: "white",
-          width: "100%",
-          height: "100%",
+          width: `${width}px`,
+          height: `${height}px`,
           display: "flex",
           flexDirection: "column",
           flexWrap: "wrap",
-          textAlign: "center",
-          alignItems: "center",
-          justifyContent: "center",
         }}
       >
         {weekItems}
@@ -58,7 +57,7 @@ export default async function og(req: NextRequest) {
     ),
     {
       width: width,
-      height: 70,
+      height: height,
     }
   );
 }
